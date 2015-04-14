@@ -22,13 +22,18 @@ import java.io.PrintStream;
 
 @SuppressWarnings("unused")
 public class FileEncryptor{
+  
+/*  
+  The point of this code is to encrypt text files.
+  I did not have enough time on my hand to continue so that I would encrypt entire paths and folders but that is my end goal
+  It only works with text files right now but it is successful with text files.
     
-
+*/
 
 
 	public static void main(String[] args) throws IOException{
         @SuppressWarnings("resource")
-		Scanner sr = new Scanner(System.in);
+		Scanner sr = new Scanner(System.in); // prompts the user to input a file that needs to be scrambled
         System.out.println("Enter File");
         String fileName = sr.nextLine();
         File efile = new File(fileName);
@@ -59,13 +64,13 @@ public class FileEncryptor{
        
         while(run){
         	try{
-        	numFile = dataIn.readByte();
+        	numFile = dataIn.readByte(); //this reads in the first byte of the byte array
         	
         	//System.out.println(line);  
-        	String s1 = Integer.toBinaryString(numFile);
+        	String s1 = Integer.toBinaryString(numFile); //converts the binary of the byte into a string so its easy to work with
         	if(s1.length() < 8){
         		while(s1.length() < 8){
-        			s1 = ("0" + s1);
+        			s1 = ("0" + s1); //adds a 0 to the front if the binary is not 8 digits long
         		}
         	}
         	
@@ -74,12 +79,12 @@ public class FileEncryptor{
         	for(int i = 0; i < s1.length()-1; i++){
         		bin.add(i, (int)s1.charAt(i));
         		
-        		if(bin.get(i) == 49){
+        		if(bin.get(i) == 49){ //the char value of 1 is 49 and 0 is 48 so i check the char value and make it the opposite
         			bin.add(i, 0);
         		}else if (bin.get(i) == 48){
         			bin.add(i, 1);
         		}
-        		s2 += bin.get(i);
+        		s2 += bin.get(i); //adds the specific ones and zeros into new binary string
 				
         	}
         	
@@ -88,10 +93,10 @@ public class FileEncryptor{
         			s2 = ("0" + s2);
         		}
         	}
-        	finByte = Byte.parseByte(s2, 2);
+        	finByte = Byte.parseByte(s2, 2); //parses the string back into a byte
         	
         	//System.out.println(finByte);
-    		fileOut.write(finByte);
+    		fileOut.write(finByte); // writes the bytes back into the new file
     		
         	
         	//fileCreate.write(numFile);
@@ -112,9 +117,6 @@ public class FileEncryptor{
         
         
       
-        //C:\Users\meltmck15\workspace\Encryption\src\main\BIGG test.docx
-        //C:\Users\meltmck15\workspace\Encryption\src\main\tester1.txt
-        ////C:\Users\meltmck15\workspace\Encryption\testFile.txt
         
 
 }
